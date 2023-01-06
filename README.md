@@ -46,5 +46,5 @@ This is to test a fullstack helm setup with Helm and Gloo Ingress Controller
   * `kubectl get all -n gloo-system`
     * _Make sure nothing is stuck in <Pending>._
 * Install Helm Chart
-  * `helm install . --generate-name`
+  * `helm install fullstack-helm ./ -f values.yaml`
     * _You may be asked to enter a password for the `minikube tunnel` you currently have running_
