@@ -5,7 +5,7 @@ This is to test a fullstack helm setup with Helm and Gloo Ingress Controller
 ## Required Software
 
 * DNSMasq
-  `brew install dnsmasq`
+  * `brew install dnsmasq`
 * Docker Desktop
   * [Download](https://www.docker.com/products/docker-desktop/)
 * Minikube
@@ -31,6 +31,10 @@ This is to test a fullstack helm setup with Helm and Gloo Ingress Controller
   * `minikube start`
 * Enable Minikube Ingress
   * `minikube addons enable ingress`
+* Allow Minikube to Pull Private Packages
+  * `minikube addons configure registry-creds`
+  * `kubectl create secret docker-registry private-registry-login-secret --docker-server=${SERVER} --docker-username=${USERNAME} --docker-password=${PASSWORD} --docker-email=${EMAIL}`
+  * `minikube addons enable registry-creds`
 * Turn on Minikube Tunnel for Local Testing:
   * `minikube tunnel`
 * Install Gloo:
