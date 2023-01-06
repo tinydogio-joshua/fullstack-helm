@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: "{{ .Values.app.name }}-deployment"
+  namespace: default
+  labels:
+    app: "{{ .Values.app.name }}"
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: "{{ .Values.app.name }}-deployment"
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: "{{ .Values.app.name }}-deployment"
+    spec:
+      containers:
+      - name: "{{ .Values.app.name }}-frontend"
+        image: learningdockerjshwh/nginx-with-html
+        imagePullPolicy: IfNotPresent
+        ports:
+          - name: fs-fe-port
+            containerPort: 80
+        readinessProbe:
+          httpGet:
+            path: /
+            port: fs-fe-port
+          initialDelaySeconds: 15
+          timeoutSeconds: 30
+        livenessProbe:
+          httpGet:
+            path: /
+            port: fs-fe-port
+          initialDelaySeconds: 15
+          timeoutSeconds: 30
+

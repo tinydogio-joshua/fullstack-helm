@@ -1,0 +1,18 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: "{{ .Values.app.name }}-ingress"
+  namespace: default
+spec:
+  rules:
+  - host: frontend.fullstack.internal
+    http:
+      paths:
+      - path: /.*
+        pathType: ImplementationSpecific
+        backend:
+          service:
+            name: "{{ .Values.app.name }}-frontend"
+            port:
+              name: fs-fe-port
+
