@@ -18,6 +18,9 @@ This is to test a fullstack helm setup with Helm and Gloo Ingress Controller
 
 ## Verification Steps
 
+* Edit /etc/hosts
+  * Add the following to `/etc/hosts`:
+    * `127.0.0.1 frontend.fullstack.internal`
 * Configure DNSMasq
   * If not already setup, we will setup DNSMasq to manage `.internal` domain names.
     * `mkdir -p $(brew --prefix)/etc/`
